@@ -1,6 +1,9 @@
 package main
 
-import "log"
+import (
+	"log"
+	"sort"
+)
 
 // 给你两个整数数组 nums1 和 nums2 ，请你以数组形式返回两数组的交集。返回结果中每个元素出现的次数，应与元素在两个数组中都出现的次数一致（如果出现次数不一致，则考虑取较小值）。可以不考虑输出结果的顺序。
 
@@ -25,24 +28,24 @@ func main() {
 }
 
 func intersect(nums1 []int, nums2 []int) []int {
-	times := len(nums1)
-	if len(nums2) < len(nums1) {
-		times = len(nums2)
-	}
-
+	sort.Ints(nums1)
+	sort.Ints(nums2)
 	result := make([]int, 0)
 	nums1Index, nums2Index := 0, 0
-	for i := 0; i < times; i++ {
+	for {
+		if nums1Index >= len(nums1) || nums2Index >= len(nums2) {
+			break
+		}
 		if nums1[nums1Index] == nums2[nums2Index] {
 			result = append(result, nums1[nums1Index])
 			nums1Index++
 			nums2Index++
-		}
-		if nums1[nums1Index] < nums2[nums2Index] {
+		} else if nums1[nums1Index] < nums2[nums2Index] {
 			nums1Index++
 		} else {
 			nums2Index++
 		}
+
 	}
 	return result
 }
