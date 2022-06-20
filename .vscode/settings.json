@@ -1,0 +1,4 @@
+{
+    "go.autocompleteUnimportedPackages": true,
+    "go.gopath": "/Users/qiuqiu/go:/Users/qiuqiu/store/leetcode"
+}

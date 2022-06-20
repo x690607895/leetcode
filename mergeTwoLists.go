@@ -1,6 +1,9 @@
 package main
 
-import "log"
+import (
+	"ListNode"
+	"log"
+)
 
 // 将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
 
@@ -25,31 +28,16 @@ import "log"
 // 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
 func main() {
-	a := createList([]int{1, 2, 3, 4, 5})
-	c := createList([]int{1, 2, 6, 7})
+	a := ListNode.CreateList([]int{1, 2, 3, 4, 5})
+	c := ListNode.CreateList([]int{1, 2, 6, 7})
 	b := mergeTwoLists(a, c)
 	for ; b != nil; b = b.Next {
 		log.Println(b)
 	}
 }
 
-func createList(src []int) *ListNode {
-	result := &ListNode{src[0], nil}
-	temp := result
-	for i := 1; i < len(src); i++ {
-		temp.Next = &ListNode{src[i], nil}
-		temp = temp.Next
-	}
-	return result
-}
-
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
-func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
-	result := &ListNode{}
+func mergeTwoLists(list1 *ListNode.ListNode, list2 *ListNode.ListNode) *ListNode.ListNode {
+	result := &ListNode.ListNode{}
 	temp := result
 	for list1 != nil && list2 != nil {
 		if list1.Val <= list2.Val {

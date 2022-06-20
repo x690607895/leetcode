@@ -1,6 +1,9 @@
 package main
 
-import "log"
+import (
+	"ListNode"
+	"log"
+)
 
 // 给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
 
@@ -22,38 +25,15 @@ import "log"
 // 来源：力扣（LeetCode）
 // 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
-/**
- * Definition for singly-linked list.
- * type ListNode struct {
- *     Val int
- *     Next *ListNode
- * }
- */
-
 func main() {
-	a := createList([]int{1, 2, 3, 4, 5})
+	a := ListNode.CreateList([]int{1, 2, 3, 4, 5})
 	b := removeNthFromEnd(a, 2)
 	for ; b != nil; b = b.Next {
 		log.Println(b)
 	}
 }
 
-func createList(src []int) *ListNode {
-	result := &ListNode{src[0], nil}
-	temp := result
-	for i := 1; i < len(src); i++ {
-		temp.Next = &ListNode{src[i], nil}
-		temp = temp.Next
-	}
-	return result
-}
-
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
-func removeNthFromEnd(head *ListNode, n int) *ListNode {
+func removeNthFromEnd(head *ListNode.ListNode, n int) *ListNode.ListNode {
 	index := getLength(head) - n
 	// 剪头
 	if index == 0 {
@@ -69,7 +49,7 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 
 	return head
 }
-func getLength(head *ListNode) int {
+func getLength(head *ListNode.ListNode) int {
 	result := 0
 	for ; head != nil; head = head.Next {
 		result++

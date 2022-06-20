@@ -1,6 +1,9 @@
 package main
 
-import "log"
+import (
+	"ListNode"
+	"log"
+)
 
 // 给你一个链表的头节点 head ，判断链表中是否有环。
 
@@ -30,30 +33,15 @@ import "log"
 // 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
 func main() {
-	a := createList([]int{1, 2, 3})
+	a := ListNode.CreateList([]int{1, 2, 3})
 	log.Println(hasCycle(a))
 }
 
-func createList(src []int) *ListNode {
-	result := &ListNode{src[0], nil}
-	temp := result
-	for i := 1; i < len(src); i++ {
-		temp.Next = &ListNode{src[i], nil}
-		temp = temp.Next
-	}
-	return result
-}
-
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
-func hasCycle(head *ListNode) bool {
+func hasCycle(head *ListNode.ListNode) bool {
 	if head == nil {
 		return false
 	}
-	temp := make(map[*ListNode]struct{})
+	temp := make(map[*ListNode.ListNode]struct{})
 
 	for head != nil {
 		if _, ok := temp[head]; ok {

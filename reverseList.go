@@ -1,6 +1,9 @@
 package main
 
-import "log"
+import (
+	"ListNode"
+	"log"
+)
 
 // 给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。
 //
@@ -24,34 +27,19 @@ import "log"
 // 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
 func main() {
-	a := createList([]int{1, 2, 3, 4, 5})
+	a := ListNode.CreateList([]int{1, 2, 3, 4, 5})
 	b := reverseList(a)
 	for ; b != nil; b = b.Next {
 		log.Println(b)
 	}
 }
 
-func createList(src []int) *ListNode {
-	result := &ListNode{src[0], nil}
-	temp := result
-	for i := 1; i < len(src); i++ {
-		temp.Next = &ListNode{src[i], nil}
-		temp = temp.Next
-	}
-	return result
-}
-
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
-func reverseList(head *ListNode) *ListNode {
-	result := &ListNode{}
+func reverseList(head *ListNode.ListNode) *ListNode.ListNode {
+	result := &ListNode.ListNode{}
 
 	for ; head != nil; head = head.Next {
 		result.Val = head.Val
-		temp := &ListNode{0, result}
+		temp := &ListNode.ListNode{0, result}
 		result = temp
 	}
 	return result.Next

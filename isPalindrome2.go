@@ -1,6 +1,9 @@
 package main
 
-import "log"
+import (
+	"ListNode"
+	"log"
+)
 
 // 给你一个单链表的头节点 head ，请你判断该链表是否为回文链表。如果是，返回 true ；否则，返回 false 。
 
@@ -19,26 +22,11 @@ import "log"
 // 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
 func main() {
-	a := createList([]int{1})
-	log.Println(isPalindrome(a))
+	a := ListNode.CreateList([]int{1})
+	log.Println(isPalindrome2(a))
 }
 
-func createList(src []int) *ListNode {
-	result := &ListNode{src[0], nil}
-	temp := result
-	for i := 1; i < len(src); i++ {
-		temp.Next = &ListNode{src[i], nil}
-		temp = temp.Next
-	}
-	return result
-}
-
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
-func isPalindrome(head *ListNode) bool {
+func isPalindrome2(head *ListNode.ListNode) bool {
 	halfList := getList(head)
 	halfReverseList := reverseList(halfList)
 	for ; halfReverseList != nil; halfReverseList, head = halfReverseList.Next, head.Next {
@@ -48,18 +36,18 @@ func isPalindrome(head *ListNode) bool {
 	}
 	return true
 }
-func reverseList(head *ListNode) *ListNode {
-	result := &ListNode{}
+func reverseList(head *ListNode.ListNode) *ListNode.ListNode {
+	result := &ListNode.ListNode{}
 
 	for ; head != nil; head = head.Next {
 		result.Val = head.Val
-		temp := &ListNode{0, result}
+		temp := &ListNode.ListNode{0, result}
 		result = temp
 	}
 	return result.Next
 }
 
-func getList(head *ListNode) *ListNode {
+func getList(head *ListNode.ListNode) *ListNode.ListNode {
 	fast, slow := head, head
 	for fast.Next != nil && fast.Next.Next != nil {
 		fast = fast.Next.Next
