@@ -1,6 +1,7 @@
 package main
 
 import (
+	"TreeNode"
 	"log"
 )
 
@@ -31,44 +32,15 @@ import (
 // 来源：力扣（LeetCode）
 // 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 func main() {
-	a := createTree([]int{1, 2, 2, 3, 4, 4, 3})
+	a := TreeNode.CreateTree([]int{1, 2, 2, 3, 4, 4, 3})
 	log.Fatal(isSymmetric(a))
 }
-func createTree(src []int) *TreeNode {
-	tempArr := make([]*TreeNode, len(src))
-	for k, v := range src {
-		if v == -1 {
-			tempArr[k] = nil
-		} else {
-			tempArr[k] = &TreeNode{v, nil, nil}
-		}
-	}
-	for i := len(src) - 1; i > 0; i-- {
-		if i%2 == 1 {
-			k := i / 2
-			tempArr[k].Left = tempArr[i]
 
-		} else {
-			k := i/2 - 1
-			tempArr[k].Right = tempArr[i]
-		}
-
-	}
-	log.Println(tempArr)
-	return tempArr[0]
-}
-
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
-func isSymmetric(root *TreeNode) bool {
+func isSymmetric(root *TreeNode.TreeNode) bool {
 	return temp2(root.Left, root.Right)
 }
 
-func temp2(left, right *TreeNode) bool {
+func temp2(left, right *TreeNode.TreeNode) bool {
 	if left == nil && right == nil {
 		return true
 	}

@@ -1,6 +1,9 @@
 package main
 
-import "log"
+import (
+	"TreeNode"
+	"log"
+)
 
 // 给你一个整数数组 nums ，其中元素已经按 升序 排列，请你将其转换为一棵 高度平衡 二叉搜索树。
 
@@ -29,20 +32,14 @@ func main() {
 	log.Fatal(a)
 }
 
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
-func sortedArrayToBST(nums []int) *TreeNode {
+func sortedArrayToBST(nums []int) *TreeNode.TreeNode {
 	return insert(nums)
 }
 
-func insert(nums []int) *TreeNode {
+func insert(nums []int) *TreeNode.TreeNode {
 	mid := len(nums) / 2
 	if len(nums) == 1 {
-		return &TreeNode{
+		return &TreeNode.TreeNode{
 			Val: nums[0],
 		}
 	} else if len(nums) == 0 {

@@ -1,6 +1,9 @@
 package main
 
-import "log"
+import (
+	"TreeNode"
+	"log"
+)
 
 // 给你二叉树的根节点 root ，返回其节点值的 层序遍历 。 （即逐层地，从左到右访问所有节点）。
 
@@ -24,43 +27,14 @@ import "log"
 // 来源：力扣（LeetCode）
 // 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 func main() {
-	a := createTree([]int{1, 2, 2, 3, 4, 4, 3})
+	a := TreeNode.CreateTree([]int{1, 2, 2, 3, 4, 4, 3})
 	log.Fatal(levelOrder(a))
 }
-func createTree(src []int) *TreeNode {
-	tempArr := make([]*TreeNode, len(src))
-	for k, v := range src {
-		if v == -1 {
-			tempArr[k] = nil
-		} else {
-			tempArr[k] = &TreeNode{v, nil, nil}
-		}
-	}
-	for i := len(src) - 1; i > 0; i-- {
-		if i%2 == 1 {
-			k := i / 2
-			tempArr[k].Left = tempArr[i]
 
-		} else {
-			k := i/2 - 1
-			tempArr[k].Right = tempArr[i]
-		}
-
-	}
-	log.Println(tempArr)
-	return tempArr[0]
-}
-
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
-func levelOrder(root *TreeNode) [][]int {
+func levelOrder(root *TreeNode.TreeNode) [][]int {
 	result := make([][]int, 0)
-	var getData func(root *TreeNode, depath int)
-	getData = func(root *TreeNode, depath int) {
+	var getData func(root *TreeNode.TreeNode, depath int)
+	getData = func(root *TreeNode.TreeNode, depath int) {
 		if root == nil {
 			return
 		}

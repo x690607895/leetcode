@@ -1,6 +1,9 @@
 package main
 
-import "log"
+import (
+	"TreeNode"
+	"log"
+)
 
 // 给定一个二叉树，找出其最大深度。
 
@@ -24,41 +27,11 @@ import "log"
 // 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
 func main() {
-	a := createTree([]int{3, 9, 20, -1, -1, 15, 7})
+	a := TreeNode.CreateTree([]int{3, 9, 20, -1, -1, 15, 7})
 	log.Fatal(maxDepth(a))
 }
 
-func createTree(src []int) *TreeNode {
-	tempArr := make([]*TreeNode, len(src))
-	for k, v := range src {
-		if v == -1 {
-			tempArr[k] = nil
-		} else {
-			tempArr[k] = &TreeNode{v, nil, nil}
-		}
-	}
-	for i := len(src) - 1; i > 0; i-- {
-		if i%2 == 1 {
-			k := i / 2
-			tempArr[k].Left = tempArr[i]
-
-		} else {
-			k := i/2 - 1
-			tempArr[k].Right = tempArr[i]
-		}
-
-	}
-	log.Println(tempArr)
-	return tempArr[0]
-}
-
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
-func maxDepth(root *TreeNode) int {
+func maxDepth(root *TreeNode.TreeNode) int {
 	if root == nil {
 		return 0
 	}
