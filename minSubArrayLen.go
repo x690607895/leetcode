@@ -27,9 +27,15 @@ import (
 // 来源：力扣（LeetCode）
 // 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
+// 思路
+// 双指针 l，r
+// 每次移动R，并且加入总和
+// 如果总和>=目标值
+// 循环-L，直至小于目标，获取最小个数
+
 func main() {
-	target := 6
-	nums := []int{1, 2, 3, 4, 5}
+	target := 7
+	nums := []int{2, 3, 1, 2, 4, 3}
 	log.Println(minSubArrayLen(target, nums))
 }
 
@@ -38,33 +44,28 @@ func minSubArrayLen(target int, nums []int) int {
 		return 0
 	}
 
+	result := -1
+	lNums := len(nums)
+	l, r := 0, 0
 	sum := 0
-	for _, v := range nums {
-		if v >= target {
+	for r < lNums {
+		sum += nums[r]
+		minL := 0
+		for sum >= target {
+			minL = r - l + 1
+			sum -= nums[l]
+			l++
+		}
+		if minL > 0 && (result == -1 || minL < result) {
+			result = minL
+		}
+		if minL == 1 {
 			return 1
 		}
-		sum += v
-	}
-	if sum < target {
-		return 0
+		r++
 	}
 
-	result := 9999
-	lNums := len(nums)
-	for i := 0; i < lNums; i++ {
-		sum := nums[i]
-		for j := i + 1; j < lNums; j++ {
-			sum += nums[j]
-			if sum >= target {
-				if (j - i + 1) < result {
-					result = j - i + 1
-				}
-				break
-			}
-		}
-	}
-
-	if result == 9999 {
+	if result == -1 {
 		result = 0
 	}
 
