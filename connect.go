@@ -69,8 +69,10 @@ func connect(root *Node) *Node {
 
 		for i, v := range tmp {
 			if i < len(tmp)-1 {
+				//打通同一层的节点
 				v.Next = tmp[i+1]
 			}
+			// 左右数全部加入列表
 			if v.Left != nil {
 				queue = append(queue, v.Left)
 			}

@@ -24,26 +24,30 @@ import "log"
 // 来源：力扣（LeetCode）
 // 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 func main() {
-	digits := "234"
+	digits := "23"
 	log.Println(letterCombinations(digits))
 }
 func letterCombinations(digits string) []string {
 	result := make([]string, 0)
-	for _, v := range digits {
-		staticdata := getStaticData(v)
-		if len(result) == 0 {
-			for _, v := range staticdata {
-				result = append(result, v)
+	temp := ""
+	var dfs func(idx int)
+	dfs = func(idx int) {
+		if idx == len(digits) {
+			if len(temp) == len(digits) {
+				result = append(result, temp)
 			}
-		} else {
-			q := result
-			result = nil
-			for _, v := range q {
-				for _, v2 := range staticdata {
-					result = append(result, v+v2)
-				}
-			}
+			return
 		}
+		staticdata := getStaticData(rune(digits[idx]))
+		for _, v := range staticdata {
+			oldTemp := temp
+			temp += v
+			dfs(idx + 1)
+			temp = oldTemp
+		}
+	}
+	for k := range digits {
+		dfs(k)
 	}
 	return result
 }
