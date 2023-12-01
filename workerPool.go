@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"runtime"
+	"os"
+	"time"
 )
 
 // 手写协程池
@@ -103,16 +104,14 @@ func (p *Pool) quit() {
 	close(p.WorkerChannel)
 	close(p.Quit)
 	close(p.Closed)
-	runtime.GC()
-	mem := runtime.MemStats{}
-	runtime.ReadMemStats(&mem)
-	fmt.Println(mem.Alloc / 1024)
-	fmt.Println(mem.Sys / 1024)
 	fmt.Println("Pool closed")
 }
 
 func main() {
-	num := 10
+	os.Exit(1)
+	t := time.Now()
+	num := 1000
+	jobNum := 1000000
 	p := Pool{
 		WorkNum:       num,
 		JobChannel:    make(chan Job),
@@ -121,9 +120,9 @@ func main() {
 		Closed:        make(chan struct{}),
 	}
 	p.start()
-	jobNum := 1000000
 	for i := 0; i < jobNum; i++ {
 		p.addJob(Job{i})
 	}
 	p.quit()
+	fmt.Println(time.Now().Sub(t).Milliseconds())
 }
